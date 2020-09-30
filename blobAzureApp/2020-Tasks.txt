@@ -1,0 +1,25 @@
+1.Link Factory changes moved to PROD
+
+CLUE-8138   -  XBench Upgrade: TextBean: add version to attribute assigned to CCR
+CLUE-8139 -    XBench Upgrade: TextBean: delete version from attribute assigned to CCR
+CLUE-8135  -   XBench Upgrade: TextBean: delete version from attribute assigned to concepts
+CLUE-8137 -    XBench Upgrade: TextBean: delete version from attribute assigned to term
+CLUE-8134 -    XBench Upgrade: TextBean: add version to attribute assigned to concepts
+CLUE-8136 -    XBench Upgrade: TextBean: add version to attribute assigned to term
+
+2. Demos
+
+Prepare development env in Azure to set up a Cassandra cluster using management tools.
+Prepare development env in Azure using Terraform
+
+3. Cassandra Disaster Recovery = Replicating Data Center Failure in a DMA Cluster and steps to regain the old state
+
+4. Fixing Cassandra restore issue 
+
+5.Datareader Comparision
+
+6. Cassandra data center rebuilt issue fix
+https://wiki.nuancehce.com/display/ENGINE/Cassandra+Data+Center+Rebuild+-+To+add+a+new+data+center+to+existing+cluster
+
+7. Datastore latest cassandra implementation
+
