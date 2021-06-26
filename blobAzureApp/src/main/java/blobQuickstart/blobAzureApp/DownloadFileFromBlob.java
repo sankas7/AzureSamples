@@ -36,7 +36,7 @@ public class DownloadFileFromBlob {
          {
          System.out.println("Item Name"+blobItem.getName());	 
          BlobClient blobClient=blobContainerClient.getBlobClient(blobItem.getName());
-         blobClient.downloadToFile("C:\\Users\\pramit.bhaumik\\playworkspace\\storage-blobs-java-quickstart\\blobAzureApp\\"+blobItem.getName().replace("/", "-"));
+         blobClient.downloadToFile("C:\\Users\\pramit.bhaumik\\git\\blobAzureApp\\"+blobItem.getName().replace("/", "-"));
           
          });
 	

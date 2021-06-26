@@ -15,7 +15,7 @@ import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.common.StorageSharedKeyCredential;
 
-public class DownloadFileWithSAS {
+public class DownloadFileWithAccountSAS {
 
 	public static void main(String argsp[]) throws IOException {
 
@@ -26,12 +26,18 @@ public class DownloadFileWithSAS {
 
 		StorageSharedKeyCredential credential = new StorageSharedKeyCredential(accountName, accessKey);
 
-		String sasEndpoint = getFileSAS(mapString.get("accountName"), mapString.get("accessKey"),
+		String sasToken = getAccountSAS(mapString.get("accountName"), mapString.get("accessKey"),
 				mapString.get("endpoint"), mapString.get("startTime"), mapString.get("endTime"),
 				mapString.get("apiversion"));
 
-		
-		BlobServiceClient storageClient = new BlobServiceClientBuilder().endpoint(sasEndpoint).credential(credential).buildClient();
+		/*
+		 * BlobServiceClient storageClient = new
+		 * BlobServiceClientBuilder().endpoint(sasEndpoint).credential(credential).
+		 * buildClient();
+		 */
+
+		BlobServiceClient storageClient = new BlobServiceClientBuilder().endpoint(mapString.get("endpoint"))
+				.sasToken(sasToken).buildClient();
 
 		BlobContainerClient blobContainerClient = storageClient.getBlobContainerClient("demo");
 
@@ -46,19 +52,20 @@ public class DownloadFileWithSAS {
 
 	}
 
-	public static String getFileSAS(String accountName, String accountKey, String endpoint, String startTime,
+	public static String getAccountSAS(String accountName, String accountKey, String endpoint, String startTime,
 			String endTime, String apiVersion) throws UnsupportedEncodingException {
 
-		String stringToSign = accountName + "\n" + "r\n" + "f\n" + "o\n" + startTime + "\n" + endTime + "\n" + "\n"
+		String stringToSign = accountName + "\n" + "r\n" + "b\n" + "sco\n" + startTime + "\n" + endTime + "\n" 
 				+ "https\n" + apiVersion + "\n";
 
 		String signature = getHMAC256(accountKey, stringToSign);
 
-		String sasToken = "sv=" + apiVersion + "&ss=f" + "&srt=o" + "&sp=r" + "&se="
-				+ URLEncoder.encode(endTime, "UTF-8") + "&st=" + URLEncoder.encode(startTime, "UTF-8") + "&spr=https"
+		String sasToken = "sv=" + apiVersion + "&ss=b" + "&srt=sco" + "&sp=r" + "&st="
+				+ URLEncoder.encode(startTime, "UTF-8") + "&se=" + URLEncoder.encode(endTime, "UTF-8") + "&spr=https"
 				+ "&sig=" + URLEncoder.encode(signature, "UTF-8");
 
-		return endpoint + "?" + sasToken;
+		// endpoint + "?" + sasToken;
+		return sasToken;
 	}
 
 	private static String getHMAC256(String accountKey, String signStr) {
