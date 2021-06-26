@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-storage-blob</artifactId>
-			<version>12.6.1</version>
+			<version>12.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -51,7 +51,13 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>8.4.1.jre8</version>
 		</dependency>
-     </dependencies>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-storage-file-share</artifactId>
+			<version>12.6.0</version>
+		</dependency>
+
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
